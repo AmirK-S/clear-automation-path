@@ -1,11 +1,14 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const CalendlySection = () => {
+  const { t } = useLanguage();
   return (
     <section id="book-call" className="py-20 px-4 bg-background">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Ready to Talk?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">{t("calendly.title")}</h2>
           <p className="text-xl md:text-2xl text-foreground/80">
-            Book a 30-minute call. We'll discuss what's possible for your business.
+            {t("calendly.subtitle")}
           </p>
         </div>
 

@@ -1,5 +1,6 @@
 import { CheckCircle2, Target, Zap, TrendingUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface GapScanSuccessProps {
   industry?: string;
@@ -8,6 +9,7 @@ interface GapScanSuccessProps {
 }
 
 const GapScanSuccess = ({ industry, biggestChallenge, onViewCalendly }: GapScanSuccessProps) => {
+  const { t } = useLanguage();
   return (
     <div className="max-w-3xl mx-auto text-center py-12">
       <div className="w-24 h-24 bg-success rounded-full flex items-center justify-center mx-auto mb-8 animate-scale-in">
@@ -15,11 +17,11 @@ const GapScanSuccess = ({ industry, biggestChallenge, onViewCalendly }: GapScanS
       </div>
       
       <h3 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-        Got it! Analyzing your business...
+        {t("gapScan.successTitle")}
       </h3>
       
       <p className="text-xl md:text-2xl text-foreground/80 mb-12">
-        Check your email in the next 10 minutes for your personalized AI Gap Scan
+        {t("gapScan.successSubtitle")}
       </p>
 
       <div className="bg-muted p-8 md:p-12 rounded-2xl mb-12">

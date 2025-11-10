@@ -1,72 +1,75 @@
-import { TrendingUp, Clock, Smile } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DollarSign, Clock, Users } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Benefits = () => {
-  const benefits = [
-    {
-      icon: TrendingUp,
-      title: "Make More Revenue",
-      items: [
-        "Automate sales follow-ups",
-        "Faster customer responses",
-        "Find opportunities you're missing",
-      ],
-    },
-    {
-      icon: Clock,
-      title: "Save Time & Money",
-      items: [
-        "Eliminate repetitive work",
-        "Reduce manual errors",
-        "Your team focuses on what matters",
-      ],
-    },
-    {
-      icon: Smile,
-      title: "Happier Team",
-      items: [
-        "No more boring tasks",
-        "Systems they actually understand",
-        "Full training included",
-      ],
-    },
-  ];
+  const { t } = useLanguage();
 
   return (
     <section className="py-20 px-4 bg-background">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-16">
-          What You Get
-        </h2>
         <div className="grid md:grid-cols-3 gap-8">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
-            return (
-              <Card
-                key={index}
-                className="border-2 hover:shadow-xl transition-shadow duration-300"
-              >
-                <CardHeader>
-                  <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-4">
-                    <Icon className="h-8 w-8 text-accent-foreground" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-primary">
-                    {benefit.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {benefit.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="flex items-start">
-                        <span className="text-accent mr-2 text-xl">•</span>
-                        <span className="text-lg text-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            );
-          })}
+          <div className="bg-card border-2 border-border rounded-2xl p-8 hover:border-primary/50 transition-all duration-300">
+            <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mb-6">
+              <DollarSign className="h-8 w-8 text-accent-foreground" />
+            </div>
+            <h3 className="text-2xl font-bold text-primary mb-4">{t("benefits.card1Title")}</h3>
+            <ul className="space-y-3 text-lg text-foreground/80">
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card1Point1")}
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card1Point2")}
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card1Point3")}
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-card border-2 border-border rounded-2xl p-8 hover:border-primary/50 transition-all duration-300">
+            <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mb-6">
+              <Clock className="h-8 w-8 text-accent-foreground" />
+            </div>
+            <h3 className="text-2xl font-bold text-primary mb-4">{t("benefits.card2Title")}</h3>
+            <ul className="space-y-3 text-lg text-foreground/80">
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card2Point1")}
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card2Point2")}
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card2Point3")}
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-card border-2 border-border rounded-2xl p-8 hover:border-primary/50 transition-all duration-300">
+            <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mb-6">
+              <Users className="h-8 w-8 text-accent-foreground" />
+            </div>
+            <h3 className="text-2xl font-bold text-primary mb-4">{t("benefits.card3Title")}</h3>
+            <ul className="space-y-3 text-lg text-foreground/80">
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card3Point1")}
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card3Point2")}
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">•</span>
+                {t("benefits.card3Point3")}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

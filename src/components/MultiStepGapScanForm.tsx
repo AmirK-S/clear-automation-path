@@ -17,6 +17,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Loader2, CheckCircle2, ArrowLeft, ArrowRight, Target, Zap, TrendingUp } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const step1Schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -53,29 +54,40 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<Partial<FormData>>({});
   const [selectedChallenges, setSelectedChallenges] = useState<string[]>([]);
+  const { t } = useLanguage();
 
   const challengeOptions = [
-    "Too much manual data entry",
-    "Repetitive admin tasks",
-    "Slow customer response times",
-    "Missing sales opportunities",
-    "Team spending time on boring work",
-    "Inconsistent processes",
-    "Information scattered everywhere",
-    "Other",
+    t("gapScan.challenge1"),
+    t("gapScan.challenge2"),
+    t("gapScan.challenge3"),
+    t("gapScan.challenge4"),
+    t("gapScan.challenge5"),
+    t("gapScan.challenge6"),
+    t("gapScan.challenge7"),
+    t("gapScan.challenge8"),
   ];
 
   const industries = [
-    "Technology/Software",
-    "Professional Services",
-    "E-commerce/Retail",
-    "Healthcare",
-    "Finance/Banking",
-    "Manufacturing",
-    "Real Estate",
-    "Marketing/Advertising",
-    "Education",
-    "Other",
+    t("industries.tech"),
+    t("industries.consulting"),
+    t("industries.ecommerce"),
+    t("industries.healthcare"),
+    t("industries.finance"),
+    t("industries.manufacturing"),
+    t("industries.realestate"),
+    t("industries.education"),
+    t("industries.marketing"),
+    t("industries.legal"),
+    t("industries.hospitality"),
+    t("industries.construction"),
+    t("industries.other"),
+  ];
+
+  const teamSizes = [
+    t("teamSizes.solo"),
+    t("teamSizes.small"),
+    t("teamSizes.medium"),
+    t("teamSizes.large"),
   ];
 
   // Load saved data on mount
@@ -193,13 +205,13 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
         </div>
         <div className="flex justify-between text-sm font-semibold">
           <span className={currentStep >= 1 ? "text-accent" : "text-muted-foreground"}>
-            About You
+            {t("gapScan.step1Title")}
           </span>
           <span className={currentStep >= 2 ? "text-accent" : "text-muted-foreground"}>
-            Your Challenges
+            {t("gapScan.step2Title")}
           </span>
           <span className={currentStep >= 3 ? "text-accent" : "text-muted-foreground"}>
-            What You Want
+            {t("gapScan.step3Title")}
           </span>
         </div>
       </div>
@@ -209,7 +221,7 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
         <form onSubmit={handleStep1Next} className="space-y-8">
           <div className="space-y-3">
             <Label htmlFor="name" className="text-xl font-semibold text-primary">
-              Your Name *
+              {t("gapScan.name")} *
             </Label>
             <Input
               id="name"
@@ -225,7 +237,7 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
 
           <div className="space-y-3">
             <Label htmlFor="email" className="text-xl font-semibold text-primary">
-              Email *
+              {t("gapScan.email")} *
             </Label>
             <Input
               id="email"
@@ -241,7 +253,7 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
 
           <div className="space-y-3">
             <Label htmlFor="company" className="text-xl font-semibold text-primary">
-              Company Name *
+              {t("gapScan.companyName")} *
             </Label>
             <Input
               id="company"
@@ -256,18 +268,18 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
 
           <div className="space-y-3">
             <Label htmlFor="industry" className="text-xl font-semibold text-primary">
-              Industry/Sector *
+              {t("gapScan.industry")} *
             </Label>
             <Select
               onValueChange={(value) => step1Form.setValue("industry", value)}
               defaultValue={formData.industry}
             >
               <SelectTrigger className="h-16 text-lg border-2">
-                <SelectValue placeholder="Select your industry" />
+                <SelectValue placeholder={t("gapScan.industryPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-background border-2 z-50">
-                {industries.map((industry) => (
-                  <SelectItem key={industry} value={industry} className="text-lg py-3 cursor-pointer">
+                {industries.map((industry, idx) => (
+                  <SelectItem key={idx} value={industry} className="text-lg py-3 cursor-pointer">
                     {industry}
                   </SelectItem>
                 ))}
@@ -280,28 +292,21 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
 
           <div className="space-y-3">
             <Label htmlFor="teamSize" className="text-xl font-semibold text-primary">
-              Team Size *
+              {t("gapScan.teamSize")} *
             </Label>
             <Select
               onValueChange={(value) => step1Form.setValue("teamSize", value)}
               defaultValue={formData.teamSize}
             >
               <SelectTrigger className="h-16 text-lg border-2">
-                <SelectValue placeholder="Select team size" />
+                <SelectValue placeholder={t("gapScan.teamSizePlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-background border-2 z-50">
-                <SelectItem value="just-me" className="text-lg py-3 cursor-pointer">
-                  Just me
-                </SelectItem>
-                <SelectItem value="2-10" className="text-lg py-3 cursor-pointer">
-                  2-10
-                </SelectItem>
-                <SelectItem value="11-50" className="text-lg py-3 cursor-pointer">
-                  11-50
-                </SelectItem>
-                <SelectItem value="50+" className="text-lg py-3 cursor-pointer">
-                  50+
-                </SelectItem>
+                {teamSizes.map((size, idx) => (
+                  <SelectItem key={idx} value={size} className="text-lg py-3 cursor-pointer">
+                    {size}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {step1Form.formState.errors.teamSize && (
@@ -313,7 +318,7 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
             type="submit"
             className="w-full h-16 text-xl font-bold bg-accent hover:bg-accent/90 text-accent-foreground"
           >
-            Next
+            {t("gapScan.next")}
             <ArrowRight className="ml-2 h-6 w-6" />
           </Button>
         </form>
@@ -323,24 +328,24 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
       {currentStep === 2 && (
         <form onSubmit={handleStep2Next} className="space-y-8">
           <div className="text-center mb-8">
-            <p className="text-xl text-foreground/80">Help me understand what's slowing you down</p>
+            <p className="text-xl text-foreground/80">{t("gapScan.step2Intro")}</p>
           </div>
 
           <div className="space-y-4">
             <Label className="text-xl font-semibold text-primary">
-              What challenges are you facing? (Select all that apply) *
+              {t("gapScan.step2Intro")} *
             </Label>
             <div className="space-y-4">
-              {challengeOptions.map((challenge) => (
-                <div key={challenge} className="flex items-center space-x-3">
+              {challengeOptions.map((challenge, idx) => (
+                <div key={idx} className="flex items-center space-x-3">
                   <Checkbox
-                    id={challenge}
+                    id={`challenge-${idx}`}
                     checked={selectedChallenges.includes(challenge)}
                     onCheckedChange={() => toggleChallenge(challenge)}
                     className="h-6 w-6"
                   />
                   <label
-                    htmlFor={challenge}
+                    htmlFor={`challenge-${idx}`}
                     className="text-lg cursor-pointer select-none"
                   >
                     {challenge}
@@ -355,13 +360,13 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
 
           <div className="space-y-3">
             <Label htmlFor="biggestTimeConsumer" className="text-xl font-semibold text-primary">
-              What takes the MOST time in your business? *
+              {t("gapScan.mostTimeQuestion")} *
             </Label>
             <Textarea
               id="biggestTimeConsumer"
               {...step2Form.register("biggestTimeConsumer")}
               className="min-h-32 text-lg border-2 resize-none"
-              placeholder="e.g., Following up with leads, processing invoices, scheduling..."
+              placeholder={t("gapScan.mostTimePlaceholder")}
               maxLength={200}
               autoFocus
             />
@@ -385,13 +390,13 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
               className="h-16 px-8 text-lg font-semibold border-2"
             >
               <ArrowLeft className="mr-2 h-6 w-6" />
-              Back
+              {t("gapScan.back")}
             </Button>
             <Button
               type="submit"
               className="flex-1 h-16 text-xl font-bold bg-accent hover:bg-accent/90 text-accent-foreground"
             >
-              Next
+              {t("gapScan.next")}
               <ArrowRight className="ml-2 h-6 w-6" />
             </Button>
           </div>
@@ -402,12 +407,12 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
       {currentStep === 3 && (
         <form onSubmit={handleFinalSubmit} className="space-y-8">
           <div className="text-center mb-8">
-            <p className="text-xl text-foreground/80">What would success look like?</p>
+            <p className="text-xl text-foreground/80">{t("gapScan.step3Intro")}</p>
           </div>
 
           <div className="space-y-3">
             <Label htmlFor="automationWish" className="text-xl font-semibold text-primary">
-              If you could automate ONE thing tomorrow, what would it be? *
+              {t("gapScan.automateQuestion")} *
             </Label>
             <Textarea
               id="automationWish"
@@ -430,7 +435,7 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
           </div>
 
           <div className="space-y-3">
-            <Label className="text-xl font-semibold text-primary">What's your timeline? *</Label>
+            <Label className="text-xl font-semibold text-primary">{t("gapScan.timelineQuestion")} *</Label>
             <RadioGroup
               onValueChange={(value) => step3Form.setValue("timeline", value)}
               defaultValue={formData.timeline}
@@ -439,19 +444,19 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
               <div className="flex items-center space-x-3 border-2 rounded-lg p-4 cursor-pointer hover:bg-muted/50">
                 <RadioGroupItem value="exploring" id="exploring" className="h-5 w-5" />
                 <Label htmlFor="exploring" className="text-lg cursor-pointer flex-1">
-                  Exploring ideas
+                  {t("gapScan.timelineExploring")}
                 </Label>
               </div>
               <div className="flex items-center space-x-3 border-2 rounded-lg p-4 cursor-pointer hover:bg-muted/50">
                 <RadioGroupItem value="3-months" id="3-months" className="h-5 w-5" />
                 <Label htmlFor="3-months" className="text-lg cursor-pointer flex-1">
-                  Next 3 months
+                  {t("gapScan.timeline3Months")}
                 </Label>
               </div>
               <div className="flex items-center space-x-3 border-2 rounded-lg p-4 cursor-pointer hover:bg-muted/50">
                 <RadioGroupItem value="urgent" id="urgent" className="h-5 w-5" />
                 <Label htmlFor="urgent" className="text-lg cursor-pointer flex-1">
-                  Urgent need
+                  {t("gapScan.timelineUrgent")}
                 </Label>
               </div>
             </RadioGroup>
@@ -462,7 +467,7 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
 
           <div className="space-y-3">
             <Label htmlFor="additionalNotes" className="text-xl font-semibold text-primary">
-              Anything else I should know? (Optional)
+              {t("gapScan.anythingElse")}
             </Label>
             <Textarea
               id="additionalNotes"
@@ -484,7 +489,7 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
               className="h-16 px-8 text-lg font-semibold border-2"
             >
               <ArrowLeft className="mr-2 h-6 w-6" />
-              Back
+              {t("gapScan.back")}
             </Button>
             <Button
               type="submit"
@@ -494,10 +499,10 @@ const MultiStepGapScanForm = ({ onSuccess }: MultiStepGapScanFormProps) => {
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-6 w-6 animate-spin" />
-                  Analyzing...
+                  {t("gapScan.successTitle")}
                 </>
               ) : (
-                "Send Me My Personalized Report"
+                t("gapScan.submit")
               )}
             </Button>
           </div>

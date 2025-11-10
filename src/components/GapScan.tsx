@@ -1,12 +1,14 @@
 import { useState } from "react";
 import MultiStepGapScanForm from "./MultiStepGapScanForm";
 import GapScanSuccess from "./GapScanSuccess";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface GapScanProps {
   onSuccess: () => void;
 }
 
 const GapScan = ({ onSuccess }: GapScanProps) => {
+  const { t } = useLanguage();
   const [isSuccess, setIsSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState<{ industry?: string; biggestChallenge?: string }>({});
 
@@ -29,12 +31,10 @@ const GapScan = ({ onSuccess }: GapScanProps) => {
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-bold text-primary mb-6">
-            Not Sure Where to Start?
+            {t("gapScan.title")}
           </h2>
           <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
-            Tell me about your business and challenges. I'll analyze your situation and send you a
-            personalized report showing exactly where AI can help - specific to YOUR business, not
-            generic advice.
+            {t("gapScan.subtitle")}
           </p>
         </div>
         

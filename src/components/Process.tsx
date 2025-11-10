@@ -1,21 +1,24 @@
 import { MessageCircle, TestTube, Wrench } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Process = () => {
+  const { t } = useLanguage();
+
   const steps = [
     {
       icon: MessageCircle,
-      title: "Talk",
-      description: "30min call, understand your needs",
+      title: t("process.step1Title"),
+      description: t("process.step1Text"),
     },
     {
       icon: TestTube,
-      title: "Test",
-      description: "Quick proof (1-2 weeks) to show it works",
+      title: t("process.step2Title"),
+      description: t("process.step2Text"),
     },
     {
       icon: Wrench,
-      title: "Build",
-      description: "Production system + train your team",
+      title: t("process.step3Title"),
+      description: t("process.step3Text"),
     },
   ];
 
@@ -23,7 +26,7 @@ const Process = () => {
     <section className="py-20 px-4 bg-background">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-16">
-          How We Work Together
+          {t("process.title")}
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -48,7 +51,7 @@ const Process = () => {
 
         <div className="bg-muted p-8 rounded-2xl text-center">
           <p className="text-2xl font-bold text-primary">
-            You own everything. Your team masters it. No vendor lock-in.
+            {t("process.trustStatement")}
           </p>
         </div>
       </div>
