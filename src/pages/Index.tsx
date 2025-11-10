@@ -25,12 +25,12 @@ const Index = () => {
       <Hero onGetReportClick={scrollToGapScan} onBookCallClick={scrollToCalendly} />
       <Benefits />
       <div ref={gapScanRef}>
-        <GapScan />
+        <GapScan onSuccess={scrollToCalendly} />
       </div>
-      <Process />
       <div ref={calendlyRef}>
         <CalendlySection />
       </div>
+      <Process />
       <Footer />
     </div>
   );

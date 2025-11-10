@@ -1,6 +1,29 @@
-import GapScanForm from "./GapScanForm";
+import { useState } from "react";
+import MultiStepGapScanForm from "./MultiStepGapScanForm";
+import GapScanSuccess from "./GapScanSuccess";
 
-const GapScan = () => {
+interface GapScanProps {
+  onSuccess: () => void;
+}
+
+const GapScan = ({ onSuccess }: GapScanProps) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [submittedData, setSubmittedData] = useState<{ industry?: string; biggestChallenge?: string }>({});
+
+  const handleSuccess = () => {
+    // In a real implementation, you'd get this from the form data
+    setSubmittedData({
+      industry: "your industry",
+      biggestChallenge: "your biggest challenges",
+    });
+    setIsSuccess(true);
+    
+    // Scroll to success message
+    setTimeout(() => {
+      window.scrollTo({ top: document.getElementById("gap-scan")?.offsetTop, behavior: "smooth" });
+    }, 100);
+  };
+
   return (
     <section id="gap-scan" className="py-20 px-4 bg-scan-bg">
       <div className="container mx-auto max-w-4xl">
@@ -9,11 +32,21 @@ const GapScan = () => {
             Not Sure Where to Start?
           </h2>
           <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
-            Tell me about your business in 2 minutes. I'll send you a personalized report showing
-            exactly where AI can help you make more money and save time.
+            Tell me about your business and challenges. I'll analyze your situation and send you a
+            personalized report showing exactly where AI can help - specific to YOUR business, not
+            generic advice.
           </p>
         </div>
-        <GapScanForm />
+        
+        {isSuccess ? (
+          <GapScanSuccess
+            industry={submittedData.industry}
+            biggestChallenge={submittedData.biggestChallenge}
+            onViewCalendly={onSuccess}
+          />
+        ) : (
+          <MultiStepGapScanForm onSuccess={handleSuccess} />
+        )}
       </div>
     </section>
   );
