@@ -234,21 +234,6 @@ const translations = {
       text: "30 minutes. Conseils gratuits. Pas d'obligation. Je te dis exactement ce que tu peux automatiser et ce que ça coûte vs. ce que ça t'économise.",
       button: "Réserve Maintenant"
     },
-      title: "Comment Ça Marche",
-      step1Title: "Audit Profond",
-      step1Text: "J'analyse ton business. Je trouve ce qui te fait perdre du temps. J'identifie les automatisations avec le plus gros ROI.",
-      step2Title: "Phases de Développement",
-      step2Text: "On construit en phases. Tu testes. Tu donnes ton feedback. On itère.",
-      step3Title: "Ton Équipe Possède Tout",
-      step3Text: "Documentation complète. Formation. Tu contrôles tout.",
-      step4Title: "On Continue (Si Tu Veux)",
-      step4Text: "Plus d'automatisations. Plus de ROI. On grandit ensemble.",
-      specialNote: "Besoin d'un déploiement ultra-sécurisé sur site pour données sensibles ? Je peux installer un serveur sur mesure chez toi. Moins cher que tu penses."
-    },
-    calendly: {
-      title: "Parle-Moi (C'est Gratuit)",
-      subtitle: "30 minutes. On discute de ton business. Je te donne des conseils actionnables. Pas d'obligation. Juste de l'aide."
-    },
     useCases: {
       title: "Ce Que J'Automatise Vraiment",
       subtitle: "Vrais projets. Vrais résultats. Vrai ROI.",
