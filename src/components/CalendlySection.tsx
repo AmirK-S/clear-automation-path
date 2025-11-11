@@ -4,9 +4,8 @@ import CalComBooker from "./CalComBooker";
 const CalendlySection = () => {
   const { t } = useLanguage();
 
-  // TODO: Replace these with your actual Cal.com credentials
-  const CAL_USERNAME = "your-username"; // Replace with your Cal.com username
-  const CAL_EVENT_SLUG = "30min"; // Replace with your event slug (e.g., "30min", "discovery-call")
+  const CAL_USERNAME = "aks-abrect";
+  const CAL_EVENT_SLUG = "30min";
 
   return (
     <section id="book-call" className="py-20 px-4 bg-background">
