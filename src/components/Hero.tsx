@@ -20,9 +20,9 @@ const Hero = ({ onGetReportClick, onBookCallClick }: HeroProps) => {
           {t("hero.subtitle")}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <Button
-            onClick={onGetReportClick}
+            onClick={onBookCallClick}
             size="lg"
             className="h-16 px-10 text-xl font-semibold bg-primary hover:bg-primary/90 text-primary-foreground"
           >
@@ -30,7 +30,7 @@ const Hero = ({ onGetReportClick, onBookCallClick }: HeroProps) => {
             <ArrowRight className="ml-2 h-6 w-6" />
           </Button>
           <Button
-            onClick={onBookCallClick}
+            onClick={onGetReportClick}
             size="lg"
             variant="outline"
             className="h-16 px-10 text-xl font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
@@ -39,11 +39,9 @@ const Hero = ({ onGetReportClick, onBookCallClick }: HeroProps) => {
           </Button>
         </div>
 
-        <div className="bg-muted p-8 rounded-2xl">
-          <p className="text-lg md:text-xl text-foreground leading-relaxed">
-            <span className="font-semibold">{t("hero.explainerBold")}</span> {t("hero.explainerText")}
-          </p>
-        </div>
+        <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
+          {t("hero.smallText")}
+        </p>
       </div>
     </section>
   );

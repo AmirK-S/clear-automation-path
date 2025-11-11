@@ -1,6 +1,5 @@
 import { useState } from "react";
-import MultiStepGapScanForm from "./MultiStepGapScanForm";
-import GapScanSuccess from "./GapScanSuccess";
+import SimpleGapScanForm from "./SimpleGapScanForm";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface GapScanProps {
@@ -10,42 +9,43 @@ interface GapScanProps {
 const GapScan = ({ onSuccess }: GapScanProps) => {
   const { t } = useLanguage();
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submittedData, setSubmittedData] = useState<{ industry?: string; biggestChallenge?: string }>({});
 
   const handleSuccess = () => {
-    // In a real implementation, you'd get this from the form data
-    setSubmittedData({
-      industry: "your industry",
-      biggestChallenge: "your biggest challenges",
-    });
     setIsSuccess(true);
     
-    // Scroll to success message
+    // Scroll to Calendly
     setTimeout(() => {
-      window.scrollTo({ top: document.getElementById("gap-scan")?.offsetTop, behavior: "smooth" });
+      onSuccess();
     }, 100);
   };
 
   return (
-    <section id="gap-scan" className="py-20 px-4 bg-scan-bg">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-bold text-primary mb-6">
-            {t("gapScan.title")}
-          </h2>
-          <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
-            {t("gapScan.subtitle")}
-          </p>
-        </div>
-        
+    <section id="gap-scan" className="py-20 px-4 bg-accent/5">
+      <div className="container mx-auto max-w-3xl">
         {isSuccess ? (
-          <GapScanSuccess
-            industry={submittedData.industry}
-            biggestChallenge={submittedData.biggestChallenge}
-            onViewCalendly={onSuccess}
-          />
+          <div className="text-center">
+            <div className="bg-card border-2 border-primary rounded-2xl p-12">
+              <div className="text-6xl mb-6">✅</div>
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+                {t("gapScan.successTitle")}
+              </h2>
+              <p className="text-xl text-foreground/80">
+                {t("gapScan.successSubtitle")}
+              </p>
+            </div>
+          </div>
         ) : (
-          <MultiStepGapScanForm onSuccess={handleSuccess} />
+          <>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+                {t("gapScan.title")}
+              </h2>
+            </div>
+            
+            <div className="bg-card border-2 border-border rounded-2xl p-8 md:p-12">
+              <SimpleGapScanForm onSuccess={handleSuccess} />
+            </div>
+          </>
         )}
       </div>
     </section>

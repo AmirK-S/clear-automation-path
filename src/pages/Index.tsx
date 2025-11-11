@@ -2,11 +2,12 @@ import { useRef } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Ticker from "@/components/Ticker";
-import Benefits from "@/components/Benefits";
-import PainPoints from "@/components/PainPoints";
-import GapScan from "@/components/GapScan";
 import CalendlySection from "@/components/CalendlySection";
+import UseCases from "@/components/UseCases";
 import Process from "@/components/Process";
+import GapScan from "@/components/GapScan";
+import About from "@/components/About";
+import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
@@ -28,15 +29,16 @@ const Index = () => {
         <Header onGetReportClick={scrollToGapScan} />
         <Hero onGetReportClick={scrollToGapScan} onBookCallClick={scrollToCalendly} />
         <Ticker />
-        <Benefits />
-        <PainPoints />
-        <div ref={gapScanRef}>
-          <GapScan onSuccess={scrollToCalendly} />
-        </div>
         <div ref={calendlyRef}>
           <CalendlySection />
         </div>
+        <UseCases onBookCallClick={scrollToCalendly} />
         <Process />
+        <div ref={gapScanRef}>
+          <GapScan onSuccess={scrollToCalendly} />
+        </div>
+        <About />
+        <FinalCTA onBookCallClick={scrollToCalendly} />
         <Footer />
       </div>
     </LanguageProvider>
