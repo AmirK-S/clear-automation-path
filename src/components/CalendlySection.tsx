@@ -1,7 +1,12 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import CalComBooker from "./CalComBooker";
 
 const CalendlySection = () => {
   const { t } = useLanguage();
+
+  const CAL_USERNAME = "aks-abrect";
+  const CAL_EVENT_SLUG = "30min";
+
   return (
     <section id="book-call" className="py-20 px-4 bg-background">
       <div className="container mx-auto max-w-4xl">
@@ -12,15 +17,16 @@ const CalendlySection = () => {
           </p>
         </div>
 
-        <div className="bg-muted rounded-2xl p-4 min-h-[700px] flex items-center justify-center">
-          <div className="text-center">
-            <p className="text-xl text-foreground/80 mb-4">
-              Calendly widget will be embedded here
-            </p>
-            <p className="text-lg text-foreground/60">
-              Add your Calendly embed code to replace this placeholder
-            </p>
-          </div>
+        <div className="bg-muted rounded-2xl p-4 min-h-[700px]">
+          <CalComBooker
+            username={CAL_USERNAME}
+            eventSlug={CAL_EVENT_SLUG}
+            view="month_view"
+            onSuccess={() => {
+              console.log("Booking successful!");
+              // You can add custom success handling here (e.g., analytics, notifications)
+            }}
+          />
         </div>
       </div>
     </section>
