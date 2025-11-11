@@ -27,10 +27,10 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     // Check localStorage first
     const saved = localStorage.getItem("preferredLang");
     if (saved === "en" || saved === "fr") return saved;
-    
-    // Detect browser language
-    const userLang = navigator.language || (navigator as any).userLanguage;
-    return userLang.startsWith("fr") ? "fr" : "en";
+
+    // Always default to French on first visit
+    // User must explicitly click EN to switch
+    return "fr";
   });
 
   const setLanguage = (lang: Language) => {
@@ -74,11 +74,12 @@ const translations = {
       smallText: "Free call. No pitch. I'll tell you exactly what you can automate and what it'll save you."
     },
     ticker: {
-      title: "Trusted by Leading Organizations"
+      title: "They Trust Me"
     },
     calendly: {
-      title: "Talk to Me (It's Free)",
-      subtitle: "30 minutes. We discuss your business. I give you actionable advice. No obligation. Just help."
+      title: "Let's Talk",
+      subtitle: "30 minutes. Free advice. No obligation. I'll tell you exactly what you can automate and what it'll cost vs. what you'll save.",
+      smallText: "No pitch. No sales. Just help."
     },
     process: {
       title: "How It Works",
@@ -179,6 +180,11 @@ const translations = {
       small: "2-10",
       medium: "11-50",
       large: "50+"
+    },
+    denemLabs: {
+      title: "Very Technical Projects or R&D?",
+      description: "I work with DenemLabs, an AI research lab with high-level technical experts. For advanced projects, we collaborate.",
+      link: "Learn more about DenemLabs →"
     }
   },
   fr: {
@@ -197,8 +203,9 @@ const translations = {
       title: "Ils Me Font Confiance"
     },
     calendly: {
-      title: "Parle-Moi (C'est Gratuit)",
-      subtitle: "30 minutes. On discute de ton business. Je te donne des conseils actionnables. Pas d'obligation. Juste de l'aide."
+      title: "Parlons",
+      subtitle: "30 minutes. Conseils gratuits. Pas d'obligation. Je te dis exactement ce que tu peux automatiser et ce que ça t'économise.",
+      smallText: "Pas de pitch. Pas de vente. Juste de l'aide."
     },
     process: {
       title: "Comment Ça Marche",
@@ -299,6 +306,11 @@ const translations = {
       small: "2-10",
       medium: "11-50",
       large: "50+"
+    },
+    denemLabs: {
+      title: "Projets très techniques ou R&D ?",
+      description: "Je travaille avec DenemLabs, un lab de recherche en IA avec des experts techniques de haut niveau. Pour les projets avancés, on collabore.",
+      link: "En savoir plus sur DenemLabs →"
     }
   }
 };

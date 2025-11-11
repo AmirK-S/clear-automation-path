@@ -5,6 +5,7 @@ import Ticker from "@/components/Ticker";
 import CalendlySection from "@/components/CalendlySection";
 import UseCases from "@/components/UseCases";
 import Process from "@/components/Process";
+import DenemLabsSection from "@/components/DenemLabsSection";
 import GapScan from "@/components/GapScan";
 import About from "@/components/About";
 import FinalCTA from "@/components/FinalCTA";
@@ -34,6 +35,7 @@ const Index = () => {
         </div>
         <UseCases onBookCallClick={scrollToCalendly} />
         <Process />
+        <DenemLabsSection />
         <div ref={gapScanRef}>
           <GapScan onSuccess={scrollToCalendly} />
         </div>

@@ -4,10 +4,17 @@ const Ticker = () => {
   const { t } = useLanguage();
   
   const companies = [
-    "ENGIE", "TotalEnergies", "Crédit Mutuel", "Société Générale", "BNP Paribas",
-    "Schneider Electric", "Veolia", "Orange Business", "Capgemini", "Atos",
-    "AXA", "Air France", "Alstom", "Thales", "Bouygues",
-    "Image7", "ExplorIA", "Denim Labs"
+    "Centrale Paris",
+    "TotalEnergies",
+    "ENGIE",
+    "Image7",
+    "QoQa",
+    "ExplorIA",
+    "DenemLabs",
+    "Arkel",
+    "Serrulink",
+    "Prevote",
+    "BBWorkers"
   ];
 
   // Double the array for seamless infinite scroll
