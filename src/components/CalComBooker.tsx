@@ -14,14 +14,11 @@ const CalComBooker = ({
   onSuccess
 }: CalComBookerProps) => {
   return (
-    <>
+    <div className="w-full">
       <BookerEmbed
         eventSlug={eventSlug}
         username={username}
         view={view}
-        customClassNames={{
-          bookerContainer: "border-subtle border",
-        }}
         onCreateBookingSuccess={() => {
           console.log("Booking created successfully");
           if (onSuccess) {
@@ -29,7 +26,7 @@ const CalComBooker = ({
           }
         }}
       />
-    </>
+    </div>
   );
 };
 

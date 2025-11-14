@@ -86,31 +86,4 @@ All colors MUST be HSL.
   .animate-scroll {
     animation: scroll 40s linear infinite;
   }
-
-  /* Cal.com embed styling */
-  [data-cal-namespace] {
-    width: 100% !important;
-    min-height: 800px !important;
-  }
-
-  [data-cal-namespace] iframe {
-    width: 100% !important;
-    min-height: 800px !important;
-    height: 800px !important;
-    border: none !important;
-  }
-
-  [data-cal-namespace] > div {
-    width: 100% !important;
-    min-height: 800px !important;
-  }
-
-  @media (max-width: 768px) {
-    [data-cal-namespace],
-    [data-cal-namespace] iframe,
-    [data-cal-namespace] > div {
-      min-height: 900px !important;
-      height: 900px !important;
-    }
-  }
 }

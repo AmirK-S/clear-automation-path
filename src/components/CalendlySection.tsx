@@ -17,17 +17,15 @@ const CalendlySection = () => {
           </p>
         </div>
 
-        <div className="bg-muted rounded-2xl p-4 md:p-6 min-h-[700px]">
-          <CalComBooker
-            username={CAL_USERNAME}
-            eventSlug={CAL_EVENT_SLUG}
-            view="month_view"
-            onSuccess={() => {
-              console.log("Booking successful!");
-              // You can add custom success handling here (e.g., analytics, notifications)
-            }}
-          />
-        </div>
+        <CalComBooker
+          username={CAL_USERNAME}
+          eventSlug={CAL_EVENT_SLUG}
+          view="month_view"
+          onSuccess={() => {
+            console.log("Booking successful!");
+            // You can add custom success handling here (e.g., analytics, notifications)
+          }}
+        />
 
         <p className="text-center text-sm text-foreground/60 mt-6">
           {t("calendly.smallText")}
