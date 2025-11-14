@@ -9,7 +9,7 @@ const CalendlySection = () => {
 
   return (
     <section id="book-call" className="py-20 px-4 bg-background">
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">{t("calendly.title")}</h2>
           <p className="text-lg md:text-xl text-foreground/80">
@@ -17,15 +17,17 @@ const CalendlySection = () => {
           </p>
         </div>
 
-        <CalComBooker
-          username={CAL_USERNAME}
-          eventSlug={CAL_EVENT_SLUG}
-          view="MONTH_VIEW"
-          onSuccess={() => {
-            console.log("Booking successful!");
-            // You can add custom success handling here (e.g., analytics, notifications)
-          }}
-        />
+        <div className="max-w-[1400px] mx-auto">
+          <CalComBooker
+            username={CAL_USERNAME}
+            eventSlug={CAL_EVENT_SLUG}
+            view="MONTH_VIEW"
+            onSuccess={() => {
+              console.log("Booking successful!");
+              // You can add custom success handling here (e.g., analytics, notifications)
+            }}
+          />
+        </div>
 
         <p className="text-center text-sm text-foreground/60 mt-6">
           {t("calendly.smallText")}

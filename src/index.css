@@ -86,4 +86,17 @@ All colors MUST be HSL.
   .animate-scroll {
     animation: scroll 40s linear infinite;
   }
+
+  /* Cal.com inline embed styling for proper text/box alignment */
+  [id^="my-cal-inline-"] {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  /* Ensure Cal.com iframe and containers use full width */
+  [id^="my-cal-inline-"] iframe,
+  [id^="my-cal-inline-"] > div {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
 }

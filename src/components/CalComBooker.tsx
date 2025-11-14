@@ -7,6 +7,12 @@ interface CalComBookerProps {
   onSuccess?: () => void;
 }
 
+declare global {
+  interface Window {
+    Cal: any;
+  }
+}
+
 const CalComBooker = ({
   username,
   eventSlug,
@@ -14,30 +20,18 @@ const CalComBooker = ({
   onSuccess
 }: CalComBookerProps) => {
   useEffect(() => {
-    // Load Cal.com embed script
-    const script = document.createElement("script");
-    script.src = "https://app.cal.com/embed/embed.js";
-    script.async = true;
-    document.head.appendChild(script);
+    const calView = view.toLowerCase();
 
-    script.onload = () => {
-      // Initialize Cal.com inline embed
-      // @ts-ignore - Cal is loaded from external script
+    const initCal = () => {
       if (window.Cal) {
-        // @ts-ignore
         window.Cal("init", eventSlug, { origin: "https://app.cal.com" });
 
-        // Convert uppercase view to lowercase for Cal.com API
-        const calView = view.toLowerCase();
-
-        // @ts-ignore
         window.Cal.ns[eventSlug]("inline", {
           elementOrSelector: `#my-cal-inline-${eventSlug}`,
           config: { layout: calView },
           calLink: `${username}/${eventSlug}`,
         });
 
-        // @ts-ignore
         window.Cal.ns[eventSlug]("ui", {
           hideEventTypeDetails: false,
           layout: calView,
@@ -45,10 +39,25 @@ const CalComBooker = ({
       }
     };
 
-    return () => {
-      // Cleanup script on unmount
-      document.head.removeChild(script);
-    };
+    // Check if Cal is already loaded
+    if (window.Cal) {
+      initCal();
+    } else {
+      // Check if script already exists
+      const existingScript = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+
+      if (existingScript) {
+        // Script exists, wait for it to load
+        existingScript.addEventListener('load', initCal);
+      } else {
+        // Load the script
+        const script = document.createElement("script");
+        script.src = "https://app.cal.com/embed/embed.js";
+        script.async = true;
+        script.onload = initCal;
+        document.head.appendChild(script);
+      }
+    }
   }, [username, eventSlug, view]);
 
   return (
