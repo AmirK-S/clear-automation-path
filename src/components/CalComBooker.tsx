@@ -17,47 +17,56 @@ const CalComBooker = ({
   username,
   eventSlug,
   view = "MONTH_VIEW",
-  onSuccess
 }: CalComBookerProps) => {
   useEffect(() => {
     const calView = view.toLowerCase();
 
-    const initCal = () => {
-      if (window.Cal) {
-        window.Cal("init", eventSlug, { origin: "https://app.cal.com" });
+    // Use Cal.com's loader function pattern
+    (function (C: any, A: string, L: string) {
+      let p = function (a: any, ar: any) {
+        a.q.push(ar);
+      };
+      let d = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
+            };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
 
-        window.Cal.ns[eventSlug]("inline", {
-          elementOrSelector: `#my-cal-inline-${eventSlug}`,
-          config: { layout: calView },
-          calLink: `${username}/${eventSlug}`,
-        });
+    window.Cal("init", eventSlug, { origin: "https://app.cal.com" });
 
-        window.Cal.ns[eventSlug]("ui", {
-          hideEventTypeDetails: false,
-          layout: calView,
-        });
-      }
-    };
+    window.Cal.ns[eventSlug]("inline", {
+      elementOrSelector: `#my-cal-inline-${eventSlug}`,
+      config: { layout: calView },
+      calLink: `${username}/${eventSlug}`,
+    });
 
-    // Check if Cal is already loaded
-    if (window.Cal) {
-      initCal();
-    } else {
-      // Check if script already exists
-      const existingScript = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
-
-      if (existingScript) {
-        // Script exists, wait for it to load
-        existingScript.addEventListener('load', initCal);
-      } else {
-        // Load the script
-        const script = document.createElement("script");
-        script.src = "https://app.cal.com/embed/embed.js";
-        script.async = true;
-        script.onload = initCal;
-        document.head.appendChild(script);
-      }
-    }
+    window.Cal.ns[eventSlug]("ui", {
+      hideEventTypeDetails: false,
+      layout: calView,
+    });
   }, [username, eventSlug, view]);
 
   return (
@@ -65,8 +74,10 @@ const CalComBooker = ({
       id={`my-cal-inline-${eventSlug}`}
       className="w-full"
       style={{
+        width: "100%",
+        height: "100%",
         minHeight: "700px",
-        height: "700px",
+        overflow: "scroll",
       }}
     />
   );
