@@ -20,7 +20,7 @@ const CalendlySection = () => {
         <CalComBooker
           username={CAL_USERNAME}
           eventSlug={CAL_EVENT_SLUG}
-          view="month_view"
+          view="MONTH_VIEW"
           onSuccess={() => {
             console.log("Booking successful!");
             // You can add custom success handling here (e.g., analytics, notifications)
