@@ -9,7 +9,7 @@ const CalendlySection = () => {
 
   return (
     <section id="book-call" className="py-20 px-4 bg-background">
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">{t("calendly.title")}</h2>
           <p className="text-lg md:text-xl text-foreground/80">
@@ -17,7 +17,7 @@ const CalendlySection = () => {
           </p>
         </div>
 
-        <div className="bg-muted rounded-2xl p-6 md:p-8 min-h-[700px]">
+        <div className="bg-muted rounded-2xl p-4 md:p-6 min-h-[700px]">
           <CalComBooker
             username={CAL_USERNAME}
             eventSlug={CAL_EVENT_SLUG}
