@@ -91,6 +91,7 @@ All colors MUST be HSL.
   [data-cal-namespace] {
     width: 100% !important;
     min-height: 800px !important;
+    max-width: 100% !important;
   }
 
   [data-cal-namespace] iframe {
@@ -98,11 +99,17 @@ All colors MUST be HSL.
     min-height: 800px !important;
     height: 800px !important;
     border: none !important;
+    max-width: 100% !important;
   }
 
   [data-cal-namespace] > div {
     width: 100% !important;
     min-height: 800px !important;
+    max-width: 100% !important;
+  }
+  
+  [data-cal-namespace] [class*="booker"] {
+    max-width: 100% !important;
   }
 
   @media (max-width: 768px) {

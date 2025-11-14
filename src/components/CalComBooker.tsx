@@ -3,14 +3,14 @@ import { BookerEmbed } from "@calcom/atoms";
 interface CalComBookerProps {
   username: string;
   eventSlug: string;
-  view?: "month_view" | "week_view" | "column_view";
+  view?: "MONTH_VIEW" | "WEEK_VIEW" | "COLUMN_VIEW";
   onSuccess?: () => void;
 }
 
 const CalComBooker = ({
   username,
   eventSlug,
-  view = "month_view",
+  view = "MONTH_VIEW",
   onSuccess
 }: CalComBookerProps) => {
   return (
