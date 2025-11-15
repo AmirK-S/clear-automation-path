@@ -74,8 +74,13 @@ export const sendToN8nWebhook = async (
 ): Promise<void> => {
   const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
 
+  // Debug logging
+  console.log('🔍 Debug - All env vars:', import.meta.env);
+  console.log('🔍 Debug - Webhook URL:', webhookUrl);
+
   if (!webhookUrl) {
     console.error('N8N webhook URL not configured');
+    console.error('Available env keys:', Object.keys(import.meta.env));
     throw new Error('Webhook configuration missing. Please contact support.');
   }
 
