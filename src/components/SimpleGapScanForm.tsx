@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2 } from "lucide-react";
+import { sendToN8nWebhook } from "@/services/webhookService";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(2),
@@ -24,7 +26,8 @@ interface SimpleGapScanFormProps {
 }
 
 const SimpleGapScanForm = ({ onSuccess }: SimpleGapScanFormProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -41,13 +44,36 @@ const SimpleGapScanForm = ({ onSuccess }: SimpleGapScanFormProps) => {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    console.log("Form submitted:", data);
-    setIsSubmitting(false);
-    onSuccess();
+
+    try {
+      // Send form data to n8n webhook
+      await sendToN8nWebhook(data, language);
+
+      console.log("Form submitted successfully:", data);
+
+      // Show success toast
+      toast({
+        title: t("gapScan.successTitle") || "Success!",
+        description: t("gapScan.successMessage") || "Your submission has been received.",
+      });
+
+      // Trigger success callback (scrolls to calendar)
+      onSuccess();
+
+    } catch (error) {
+      console.error("Form submission error:", error);
+
+      // Show error toast
+      toast({
+        title: t("gapScan.errorTitle") || "Submission Failed",
+        description: error instanceof Error
+          ? error.message
+          : t("gapScan.errorMessage") || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
